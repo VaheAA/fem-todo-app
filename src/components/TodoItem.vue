@@ -1,11 +1,12 @@
 <template>
   <div
-    class="flex justify-start gap-4 items-center mb-2 py-2 px-2"
+    class="flex justify-start gap-4 items-center mb-2 last:mb-0 py-4 px-4 border-b border-lightGrayishBlue"
     :completed="completed"
   >
     <button
-      class="w-6 h-6 border-lightGrayishBlue rounded-full flex items-center justify-center hover:border-veryDarkGrayishBlue"
+      class="w-6 h-6 border-lightGrayishBlue dark:border-veryDarkGrayishBlue rounded-full flex items-center justify-center hover:border-veryDarkGrayishBlue dark:hover:border-veryLightGrayishBlue"
       :class="{ 'bg-check-gradient': completed, 'border-2': !completed }"
+      @click="completeTask(id)"
     >
       <svg
         v-if="completed"
@@ -21,8 +22,17 @@
         />
       </svg>
     </button>
-    <p class="cursor-pointer text-lg">{{ todoText }}</p>
-    <button class="ml-auto">
+    <p
+      class="cursor-pointer text-lg dark:text-veryLightGray"
+      :class="{
+        'line-through': completed,
+        'text-veryLightGrayishBlue': completed,
+        'dark:text-veryDarkGrayishBlue1': completed
+      }"
+    >
+      {{ todoText }}
+    </p>
+    <button class="ml-auto" @click="deleteItem(id)">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18">
         <path
           fill="#494C6B"
@@ -39,4 +49,14 @@ const props = defineProps({
   completed: Boolean,
   todoText: String
 });
+
+const emit = defineEmits(['delete', 'complete']);
+
+const deleteItem = (id) => {
+  emit('delete', id);
+};
+
+const completeTask = (id) => {
+  emit('complete', id);
+};
 </script>

@@ -1,6 +1,13 @@
 <template>
-  <form class="w-full flex bg-veryLightGray rounded-md items-center px-6 mt-11">
-    <button class="w-6 h-6 block border-2 border-lightGrayishBlue rounded-full">
+  <form
+    class="w-full flex bg-veryLightGray dark:bg-veryDarkDesBlue rounded-md items-center px-4 mt-11"
+    @submit.prevent="createTodo"
+  >
+    <span
+      class="w-6 h-6 border-2 border-lightGrayishBlue rounded-full flex items-center justify-center cursor-pointer"
+      :class="{ 'bg-check-gradient': completed, 'border-2': !completed }"
+      @click="completed = !completed"
+    >
       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
         <path
           fill="none"
@@ -9,13 +16,22 @@
           d="M1 4.304L3.696 7l6-6"
         />
       </svg>
-    </button>
+    </span>
     <input
-      class="border-0 bg-veryLightGray outline-none py-3 px-3 rounded-md w-full"
+      class="border-0 outline-none py-3 px-3 rounded-md w-full dark:bg-veryDarkDesBlue"
       type="text"
       placeholder="Create new todo..."
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </form>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps(['modelValue', 'completed']);
+const emit = defineEmits(['addTodo', 'update:modelValue']);
+
+const createTodo = () => {
+  emit('addTodo');
+};
+</script>

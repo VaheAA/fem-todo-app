@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     colors: {
@@ -24,7 +25,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'hero-pattern': "url('./src/assets/images/bg-desktop-light.jpg')",
+        'hero-pattern-light': "url('./src/assets/images/bg-desktop-light.jpg')",
+        'hero-pattern-dark': "url('./src/assets/images/bg-desktop-dark.jpg')",
         'check-gradient':
           'linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));'
       }
