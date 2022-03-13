@@ -24,7 +24,9 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'hero-pattern': "url('./src/assets/images/bg-desktop-dark.jpg')"
+        'hero-pattern': "url('./src/assets/images/bg-desktop-light.jpg')",
+        'check-gradient':
+          'linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));'
       }
     }
   },

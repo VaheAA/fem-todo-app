@@ -1,7 +1,7 @@
 <script setup>
-import HeaderBg from './components/HeaderBg.vue';
+import TodoContainer from './components/TodoContainer.vue';
 </script>
 
 <template>
-  <HeaderBg />
+  <TodoContainer />
 </template>
