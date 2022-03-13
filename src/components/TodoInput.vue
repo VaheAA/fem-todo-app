@@ -1,5 +1,5 @@
 <template>
-  <form class="w-full flex bg-veryLightGray rounded-md items-center px-2 mt-11">
+  <form class="w-full flex bg-veryLightGray rounded-md items-center px-6 mt-11">
     <button class="w-6 h-6 block border-2 border-lightGrayishBlue rounded-full">
       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
         <path
