@@ -10,7 +10,10 @@
         v-for="status in statuses"
         :key="status"
         class="text-lightGrayishBlue capitalize dark:text-darkGrayishBlue dark:hover:text-lightGrayishBlue hover:text-darkGrayishBlue cursor-pointer"
-        :class="{ 'text-brightBlue': active === status }"
+        :class="{
+          'text-brightBlue': active === status,
+          'dark:text-brightBlue': active === status
+        }"
         @click="changeFilter(status)"
         :status="status"
         >{{ status }}</span
