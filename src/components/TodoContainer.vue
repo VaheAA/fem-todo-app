@@ -52,15 +52,17 @@ const { submitTodo, deleteTodo, completeTodo, deleteCompleted, updateTodos } =
   useTodo();
 
 const filterTodos = computed(() => {
-  switch (filter.value) {
-    case 'all':
-      return todos.value;
-    case 'active':
-      return todos.value.filter((todo) => todo.completed === false);
-    case 'completed':
-      return todos.value.filter((todo) => todo.completed !== false);
-    default:
-      return todos.value;
+  if (todos.value) {
+    switch (filter.value) {
+      case 'all':
+        return todos.value;
+      case 'active':
+        return todos.value.filter((todo) => todo.completed === false);
+      case 'completed':
+        return todos.value.filter((todo) => todo.completed !== false);
+      default:
+        return todos.value;
+    }
   }
 });
 
