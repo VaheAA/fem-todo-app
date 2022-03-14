@@ -32,6 +32,8 @@ import TotoHeader from './TotoHeader.vue';
 import TodoInput from './TodoInput.vue';
 import TodoList from './TodoList.vue';
 import TodoFooter from './TodoFooter.vue';
+import { useTodo } from '../composables/useTodo';
+import { getTodos } from '../composables/getTodos';
 
 const todoInput = ref('');
 const completed = ref(false);
@@ -39,6 +41,9 @@ const filter = ref('');
 const active = ref('');
 
 const todos = ref(JSON.parse(localStorage.getItem('todos')));
+
+const { submitTodo, deleteTodo, completeTodo, deleteCompleted, updateTodos } =
+  useTodo();
 
 const filterTodos = computed(() => {
   switch (filter.value) {
@@ -60,13 +65,9 @@ const handleSubmit = () => {
       body: todoInput.value,
       completed: completed.value
     };
-    if (localStorage.getItem('todos')) {
-      todos.value = [...todos.value, newTodo];
-      localStorage.setItem('todos', JSON.stringify(todos.value));
-    } else {
-      localStorage.setItem('todos', JSON.stringify([newTodo]));
-    }
-    todos.value = JSON.parse(localStorage.getItem('todos'));
+    submitTodo(todos, newTodo);
+  } else {
+    alert('Please, enter the todo text before submitting');
   }
   todoInput.value = '';
   completed.value = false;
@@ -77,14 +78,10 @@ const markAsCompleted = () => {
 };
 
 const handleDelete = (id) => {
-  todos.value = todos.value.filter((item) => item.id !== id);
-  localStorage.setItem('todos', JSON.stringify(todos.value));
+  deleteTodo(todos, id);
 };
 const handleComplete = (id) => {
-  todos.value.map((item) =>
-    item.id === id ? (item.completed = !item.completed) : item.completed
-  );
-  localStorage.setItem('todos', JSON.stringify(todos.value));
+  completeTodo(todos, id);
 };
 
 const changeStatus = (status) => {
@@ -93,22 +90,14 @@ const changeStatus = (status) => {
 };
 
 const cleanCompleted = () => {
-  todos.value = todos.value.filter((todo) => todo.completed === false);
-  localStorage.setItem('todos', JSON.stringify(todos.value));
+  deleteCompleted(todos);
 };
 
 onMounted(() => {
-  todos.value = JSON.parse(localStorage.getItem('todos'));
-  active.value = 'all';
-  filter.value = 'all';
+  getTodos(todos, active, filter);
 });
 
 onUpdated(() => {
-  if (
-    todos.value &&
-    todos.value.length !== JSON.parse(localStorage.getItem('todos')).length
-  ) {
-    todos.value = JSON.parse(localStorage.getItem('todos'));
-  }
+  updateTodos(todos);
 });
 </script>
