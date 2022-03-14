@@ -23,11 +23,11 @@
       </svg>
     </button>
     <p
-      class="cursor-pointer text-lg dark:text-veryLightGray"
+      class="cursor-pointer text-lg text-veryDarkGrayishBlue dark:text-lightGrayishBlue"
       :class="{
         'line-through': completed,
         'text-veryLightGrayishBlue': completed,
-        'dark:text-veryDarkGrayishBlue1': completed
+        'dark:text-veryDarkGrayishBlue': completed
       }"
     >
       {{ todoText }}

@@ -4,7 +4,12 @@
   >
     <div class="max-w-xl mx-auto px-4 pt-14">
       <TotoHeader />
-      <TodoInput @add-todo="handleSubmit" v-model="todoInput" />
+      <TodoInput
+        @add-todo="handleSubmit"
+        v-model="todoInput"
+        :completed="completed"
+        @complete="markAsCompleted"
+      />
       <TodoList
         :todos="todos"
         @handleDelete="handleDelete"
@@ -37,13 +42,17 @@ const handleSubmit = () => {
     if (localStorage.getItem('todos')) {
       todos.value = [...todos.value, newTodo];
       localStorage.setItem('todos', JSON.stringify(todos.value));
-      todoInput.value = '';
-      completed.value = false;
     } else {
       localStorage.setItem('todos', JSON.stringify([newTodo]));
     }
     todos.value = JSON.parse(localStorage.getItem('todos'));
   }
+  todoInput.value = '';
+  completed.value = false;
+};
+
+const markAsCompleted = () => {
+  completed.value = !completed.value;
 };
 
 const handleDelete = (id) => {

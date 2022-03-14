@@ -1,12 +1,12 @@
 <template>
   <form
     class="w-full flex bg-veryLightGray dark:bg-veryDarkDesBlue rounded-md items-center px-4 mt-11"
-    @submit.prevent="createTodo"
+    @submit.prevent.enter="createTodo"
   >
     <span
       class="w-6 h-6 border-2 border-lightGrayishBlue rounded-full flex items-center justify-center cursor-pointer"
       :class="{ 'bg-check-gradient': completed, 'border-2': !completed }"
-      @click="completed = !completed"
+      @click="markAsComplete"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
         <path
@@ -18,7 +18,7 @@
       </svg>
     </span>
     <input
-      class="border-0 outline-none py-3 px-3 rounded-md w-full dark:bg-veryDarkDesBlue"
+      class="border-0 outline-none py-3 px-3 rounded-md w-full dark:bg-veryDarkDesBlue dark:text-darkGrayishBlue text-veryDarkGrayishBlue text-lg"
       type="text"
       placeholder="Create new todo..."
       :value="modelValue"
@@ -29,9 +29,13 @@
 
 <script setup>
 defineProps(['modelValue', 'completed']);
-const emit = defineEmits(['addTodo', 'update:modelValue']);
+const emit = defineEmits(['addTodo', 'update:modelValue', 'complete']);
 
 const createTodo = () => {
   emit('addTodo');
+};
+
+const markAsComplete = () => {
+  emit('complete');
 };
 </script>
