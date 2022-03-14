@@ -10,7 +10,7 @@
         @handleDelete="handleDelete"
         @handleComplete="handleComplete"
       />
-      <TodoFooter />
+      <TodoFooter :count="todos.length" />
     </div>
   </div>
 </template>
