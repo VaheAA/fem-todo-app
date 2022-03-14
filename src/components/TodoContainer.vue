@@ -1,29 +1,31 @@
 <template>
-  <div
-    class="bg-hero-pattern-light dark:bg-hero-pattern-dark h-72 bg-cover bg-no-repeat"
-  >
-    <div class="max-w-xl mx-auto px-3 md:px-4 pt-14">
-      <TotoHeader />
-      <TodoInput
-        @add-todo="handleSubmit"
-        v-model="todoInput"
-        :completed="completed"
-        @complete="markAsCompleted"
-      />
-      <TodoList
-        :todos="filterTodos"
-        @handleDrop="onDrop($event, l)"
-        @handleDelete="handleDelete"
-        @handleComplete="handleComplete"
-      />
-      <TodoFooter
-        :active="active"
-        :count="filterTodos ? filterTodos.length : '0'"
-        @change-filter="changeStatus"
-        @clean-completed="cleanCompleted"
-      />
+  <main>
+    <div
+      class="bg-hero-pattern-light dark:bg-hero-pattern-dark h-72 bg-cover bg-no-repeat"
+    >
+      <div class="max-w-xl mx-auto px-3 md:px-4 pt-14">
+        <TotoHeader />
+        <TodoInput
+          @add-todo="handleSubmit"
+          v-model="todoInput"
+          :completed="completed"
+          @complete="markAsCompleted"
+        />
+        <TodoList
+          :todos="filterTodos"
+          @handleDrop="onDrop($event, l)"
+          @handleDelete="handleDelete"
+          @handleComplete="handleComplete"
+        />
+        <TodoFooter
+          :active="active"
+          :count="filterTodos ? filterTodos.length : '0'"
+          @change-filter="changeStatus"
+          @clean-completed="cleanCompleted"
+        />
+      </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>
