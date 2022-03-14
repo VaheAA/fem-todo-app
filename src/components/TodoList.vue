@@ -2,13 +2,13 @@
   <div
     class="max-w-full bg-veryLightGray dark:bg-veryDarkDesBlue mt-6 rounded-t-md"
   >
-    <ul v-if="todos">
+    <ul v-if="todos" :todos="todos">
       <li v-for="todo in todos" :key="todo.id">
         <TodoItem
           :todoText="todo.body"
           :completed="todo.completed"
-          @delete="handleDelete(todo.id)"
-          @complete="handleComplete(todo.id)"
+          @delete="deleteTodo(todo.id)"
+          @complete="completeTodo(todo.id)"
         />
       </li>
     </ul>
@@ -16,21 +16,19 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, onUpdated, ref, inject } from 'vue';
 import TodoItem from './TodoItem.vue';
-const todos = ref([]);
 
-const handleDelete = (id) => {
-  todos.value = todos.value.filter((item) => item.id !== id);
-  localStorage.setItem('todos', JSON.stringify(todos.value));
-};
-const handleComplete = (id) => {
-  todos.value = todos.value.map((item) =>
-    item.id === id ? (item.completed = !item.completed) : item.completed
-  );
-};
-
-onMounted(() => {
-  todos.value = JSON.parse(localStorage.getItem('todos'));
+const props = defineProps({
+  todos: Array
 });
+
+const emit = defineEmits(['handleDelete', 'handleComplete']);
+
+const deleteTodo = (id) => {
+  emit('handleDelete', id);
+};
+const completeTodo = (id) => {
+  emit('handleComplete', id);
+};
 </script>
