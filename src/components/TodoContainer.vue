@@ -12,12 +12,13 @@
       />
       <TodoList
         :todos="filterTodos"
+        @handleDrop="onDrop($event, l)"
         @handleDelete="handleDelete"
         @handleComplete="handleComplete"
       />
       <TodoFooter
         :active="active"
-        :count="filterTodos.length"
+        :count="filterTodos ? filterTodos.length : '0'"
         @change-filter="changeStatus"
         @clean-completed="cleanCompleted"
       />
@@ -103,7 +104,10 @@ onMounted(() => {
 });
 
 onUpdated(() => {
-  if (todos.value.length !== JSON.parse(localStorage.getItem('todos')).length) {
+  if (
+    todos.value &&
+    todos.value.length !== JSON.parse(localStorage.getItem('todos')).length
+  ) {
     todos.value = JSON.parse(localStorage.getItem('todos'));
   }
 });

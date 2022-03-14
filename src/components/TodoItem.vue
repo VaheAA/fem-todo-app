@@ -2,6 +2,7 @@
   <div
     class="flex justify-start gap-4 items-center mb-2 last:mb-0 py-3 px-3 md:py-4 md:px-4 border-b border-lightGrayishBlue"
     :completed="completed"
+    draggable="true"
   >
     <button
       class="w-6 h-6 border-lightGrayishBlue dark:border-veryDarkGrayishBlue rounded-full flex items-center justify-center hover:border-veryDarkGrayishBlue dark:hover:border-veryLightGrayishBlue"
