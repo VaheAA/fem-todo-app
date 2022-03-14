@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-start gap-4 items-center mb-2 last:mb-0 py-4 px-4 border-b border-lightGrayishBlue"
+    class="flex justify-start gap-4 items-center mb-2 last:mb-0 py-3 px-3 md:py-4 md:px-4 border-b border-lightGrayishBlue"
     :completed="completed"
   >
     <button
@@ -23,10 +23,11 @@
       </svg>
     </button>
     <p
-      class="cursor-pointer text-lg text-veryDarkGrayishBlue dark:text-lightGrayishBlue"
+      class="cursor-pointer text-lg dark:text-lightGrayishBlue"
       :class="{
         'line-through': completed,
         'text-veryLightGrayishBlue': completed,
+        'text-veryDarkGrayishBlue': !completed,
         'dark:text-veryDarkGrayishBlue': completed
       }"
     >

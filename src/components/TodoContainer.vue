@@ -2,7 +2,7 @@
   <div
     class="bg-hero-pattern-light dark:bg-hero-pattern-dark h-72 bg-cover bg-no-repeat"
   >
-    <div class="max-w-xl mx-auto px-4 pt-14">
+    <div class="max-w-xl mx-auto px-3 md:px-4 pt-14">
       <TotoHeader />
       <TodoInput
         @add-todo="handleSubmit"
@@ -11,17 +11,22 @@
         @complete="markAsCompleted"
       />
       <TodoList
-        :todos="todos"
+        :todos="filterTodos"
         @handleDelete="handleDelete"
         @handleComplete="handleComplete"
       />
-      <TodoFooter :count="todos.length" />
+      <TodoFooter
+        :active="active"
+        :count="filterTodos.length"
+        @change-filter="changeStatus"
+        @clean-completed="cleanCompleted"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue';
+import { ref, onMounted, onUpdated, computed } from 'vue';
 import TotoHeader from './TotoHeader.vue';
 import TodoInput from './TodoInput.vue';
 import TodoList from './TodoList.vue';
@@ -29,8 +34,23 @@ import TodoFooter from './TodoFooter.vue';
 
 const todoInput = ref('');
 const completed = ref(false);
+const filter = ref('');
+const active = ref('');
 
 const todos = ref(JSON.parse(localStorage.getItem('todos')));
+
+const filterTodos = computed(() => {
+  switch (filter.value) {
+    case 'all':
+      return todos.value;
+    case 'active':
+      return todos.value.filter((todo) => todo.completed === false);
+    case 'completed':
+      return todos.value.filter((todo) => todo.completed !== false);
+    default:
+      return todos.value;
+  }
+});
 
 const handleSubmit = () => {
   if (todoInput.value !== '') {
@@ -66,8 +86,20 @@ const handleComplete = (id) => {
   localStorage.setItem('todos', JSON.stringify(todos.value));
 };
 
+const changeStatus = (status) => {
+  filter.value = status;
+  active.value = status;
+};
+
+const cleanCompleted = () => {
+  todos.value = todos.value.filter((todo) => todo.completed === false);
+  localStorage.setItem('todos', JSON.stringify(todos.value));
+};
+
 onMounted(() => {
   todos.value = JSON.parse(localStorage.getItem('todos'));
+  active.value = 'all';
+  filter.value = 'all';
 });
 
 onUpdated(() => {

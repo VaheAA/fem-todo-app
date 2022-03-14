@@ -8,7 +8,12 @@
       :class="{ 'bg-check-gradient': completed, 'border-2': !completed }"
       @click="markAsComplete"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="9">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="11"
+        height="9"
+        v-if="completed"
+      >
         <path
           fill="none"
           stroke="#FFF"
@@ -18,7 +23,7 @@
       </svg>
     </span>
     <input
-      class="border-0 outline-none py-3 px-3 rounded-md w-full dark:bg-veryDarkDesBlue dark:text-darkGrayishBlue text-veryDarkGrayishBlue text-lg"
+      class="border-0 outline-none py-3 px-3 md:py-4 md:px-4 rounded-md w-full dark:bg-veryDarkDesBlue dark:text-darkGrayishBlue text-veryDarkGrayishBlue sm:text-lg"
       type="text"
       placeholder="Create new todo..."
       :value="modelValue"

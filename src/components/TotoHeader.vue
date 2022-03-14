@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-xl flex justify-between items-center">
-    <h1 class="text-6xl tracking-widest text-veryLightGray">TODO</h1>
+    <h1 class="text-3xl sm:text-6xl tracking-widest text-veryLightGray">
+      TODO
+    </h1>
     <button class="bg-transparent" @click="toggleTheme">
       <svg
         xmlns="http://www.w3.org/2000/svg"
