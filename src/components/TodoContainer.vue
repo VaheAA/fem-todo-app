@@ -13,7 +13,6 @@
         />
         <TodoList
           :todos="filterTodos"
-          @handleDrop="onDrop($event, l)"
           @handleDelete="handleDelete"
           @handleComplete="handleComplete"
         />
@@ -23,6 +22,11 @@
           @change-filter="changeStatus"
           @clean-completed="cleanCompleted"
         />
+        <p
+          class="text-center text-veryDarkGrayishBlue dark:text-veryDarkGrayishBlue1 mt-3"
+        >
+          Drag and drop to reorder the list
+        </p>
       </div>
     </div>
   </main>
