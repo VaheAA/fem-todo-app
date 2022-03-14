@@ -7,16 +7,16 @@
     </p>
     <div class="hidden md:flex flex-row gap-4">
       <span
-        v-for="status in statuses"
-        :key="status"
+        v-for="category in categoryes"
+        :key="category"
         class="text-lightGrayishBlue capitalize dark:text-darkGrayishBlue dark:hover:text-lightGrayishBlue hover:text-darkGrayishBlue cursor-pointer"
         :class="{
-          'text-brightBlue': active === status,
-          'dark:text-brightBlue': active === status
+          'text-brightBlue': active === category,
+          'dark:text-brightBlue': active === category
         }"
-        @click="changeFilter(status)"
-        :status="status"
-        >{{ status }}</span
+        @click="changeFilter(category)"
+        :category="category"
+        >{{ category }}</span
       >
     </div>
     <button
@@ -30,16 +30,16 @@
     class="flex md:hidden flex-row justify-center gap-4 bg-veryLightGray dark:bg-veryDarkDesBlue py-3 px-3 md:py-4 md:px-4 mt-2 rounded-md"
   >
     <span
-      v-for="status in statuses"
-      :key="status"
+      v-for="category in categoryes"
+      :key="category"
       class="text-lightGrayishBlue capitalize dark:text-darkGrayishBlue dark:hover:text-lightGrayishBlue hover:text-darkGrayishBlue cursor-pointer"
       :class="{
-        'text-brightBlue': active === status,
-        'dark:text-brightBlue': active === status
+        'text-brightBlue': active === category,
+        'dark:text-brightBlue': active === category
       }"
-      @click="changeFilter(status)"
-      :status="status"
-      >{{ status }}</span
+      @click="changeFilter(category)"
+      :category="category"
+      >{{ category }}</span
     >
   </div>
 </template>
@@ -48,16 +48,16 @@
 import { ref } from 'vue';
 const props = defineProps({
   count: Number,
-  status: String,
+  category: String,
   active: String
 });
 
-const statuses = ref(['all', 'active', 'completed']);
+const categoryes = ref(['all', 'active', 'completed']);
 
 const emit = defineEmits(['changeFilter', 'cleanCompleted']);
 
-const changeFilter = (status) => {
-  emit('changeFilter', status);
+const changeFilter = (category) => {
+  emit('changeFilter', category);
 };
 
 const cleanCompleted = () => {

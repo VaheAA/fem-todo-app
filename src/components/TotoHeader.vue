@@ -3,7 +3,11 @@
     <h1 class="text-3xl sm:text-6xl tracking-widest text-veryLightGray">
       TODO
     </h1>
-    <button class="bg-transparent" @click="toggleTheme">
+    <button
+      class="bg-transparent"
+      aria-label="change theme"
+      @click="toggleTheme"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="26"
